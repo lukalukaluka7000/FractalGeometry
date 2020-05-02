@@ -1,0 +1,117 @@
+﻿  MainExercise.cpp
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(25,7): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(26,7): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(37,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(37,18): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(55,13): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(55,46): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(60,13): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(60,46): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(61,13): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(61,46): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(67,13): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(67,43): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(84,27): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(85,12): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(86,20): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(86,36): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(89,12): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(90,12): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(91,25): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(91,58): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(94,12): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(95,25): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(96,25): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(412,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(486,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(487,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(575,20): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(576,21): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(577,27): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(578,21): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(579,30): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(580,30): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(581,28): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(582,27): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(609,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(610,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\lukab\source\repos\Fraktalna geometrija\Kochina krivulja\MainExercise.cpp(733,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+  Generating Code...
+  Kochina krivulja.vcxproj -> C:\Users\lukab\source\repos\Fraktalna geometrija\Debug\Kochina krivulja.exe
