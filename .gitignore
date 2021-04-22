@@ -29,6 +29,7 @@ Debug/
 Release/
 bin/
 obj/
+deps/
 *_i.c
 *_p.c
 *_i.h
