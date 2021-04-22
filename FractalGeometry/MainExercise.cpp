@@ -1,8 +1,8 @@
 #define PI 3.141592653589793
 #include "MainExercise.h"
 #include<iostream>
-//#include<GL/glew.h>
 #include<GL/glut.h>
+
 #include<glm/glm.hpp>
 #include<vector>
 #include<algorithm>
@@ -25,6 +25,7 @@ void MainExercise::init(int windowWidth, int windowHeight) {
 	SW = windowWidth;
 	SH = windowHeight;
 }
+#pragma region 
 void drawFractalRecursively(glm::vec2 A, glm::vec2 B, glm::vec2 C, int depth) {
 	glm::vec2 Ap, Bp, Cp;
 	
@@ -421,7 +422,7 @@ void LinderMayerSystemPrekinuteKrivulje() {
 		}
 	}
 }
-
+#pragma endregion Sve sto nije mandelbrot
 
 
 struct Complex {
@@ -667,8 +668,8 @@ void renderScene() {
 	//LinderMayerSystem();
 	//LinderMayerSystemPrekinuteKrivulje();
 
-	//MandelBrotDraw();
-	JulijeDraw();
+	MandelBrotDraw();
+	//JulijeDraw();
 }
 
 
