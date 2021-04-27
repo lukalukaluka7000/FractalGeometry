@@ -4,6 +4,9 @@ class MandelBrotProgram
 {
 public:
 	void init(/*&_inputManager*/float w, int SW, int SH, int limit, glm::vec2 center, float odmakOdRuba);
+	int getLimit() { return _limit; }
+	glm::vec2 getUVMin() { return _uvMin; }
+	glm::vec2 getUVMax() { return _uvMax; }
 private:
 	void prepareOverlapingCoordinatePlanes();
 	int _limit;

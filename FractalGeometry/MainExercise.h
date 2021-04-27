@@ -1,7 +1,8 @@
 #pragma once
 #include <FractalGeometry\Window.h>
 #include <FractalGeometry\MandelBrotProgram.h>
-
+#include <FractalGeometry\GLSLProgram.h>
+enum class GameState { RUNNING, EXIT };
 class MainExercise
 {
 public:
@@ -14,6 +15,8 @@ public:
 private:
 	void initSystems();
 
+	void initStaticData();
+
 	void exerciseLoop();
 	void processInput();
 
@@ -23,6 +26,10 @@ private:
 	int getWindHeight() { return _windowHeight; }
 	int getWindWidth() { return _windowWidth; }
 
+	void initShaders();
+
+	std::vector<unsigned int> GeneratePixels();
+
 	Window _window;
 	MandelBrotProgram _mandelbrot;
 
@@ -30,4 +37,8 @@ private:
 	int _windowHeight;
 	int _startX;
 	int _startY;
+
+	GameState _gameState;
+
+	GLSLProgram _glslProgram;
 };
