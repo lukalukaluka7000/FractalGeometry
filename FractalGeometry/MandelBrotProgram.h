@@ -1,7 +1,14 @@
 #pragma once
+#include<glm/glm.hpp>
 class MandelBrotProgram
 {
 public:
-	void init(/*&_inputManager*/);
+	void init(/*&_inputManager*/float w, int SW, int SH, int limit, glm::vec2 center, float odmakOdRuba);
+private:
+	void prepareOverlapingCoordinatePlanes();
+	int _limit;
+	glm::vec2 _uvMin, _uvMax, _center;
+	float _w, _odmakOdRuba;
+	int _SH, _SW;
 };
 
