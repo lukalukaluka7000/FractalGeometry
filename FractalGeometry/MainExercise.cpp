@@ -62,7 +62,7 @@ void MainExercise::initStaticData()
 }
 void MainExercise::initShaders() {
 	_glslProgram.compileShaders("./Shaders/mandelbrot.vert", "./Shaders/mandelbrot.frag");
-	_glslProgram.addAttribute("pixels");
+	_glslProgram.addAttribute("pixel");
 	_glslProgram.linkShaders();
 }
 //int limit = 150; // limit je 200 dosta za Slika 13.9

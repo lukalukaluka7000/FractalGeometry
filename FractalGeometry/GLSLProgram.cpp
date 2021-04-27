@@ -86,15 +86,15 @@ void GLSLProgram::compileShadersFromSource(const char* vertexSource, const char*
 }
 void GLSLProgram::compileShader(const char* source, const std::string& name, GLuint id)
 {
-	std::ifstream File(source);
+	/*std::ifstream File(source);
 	std::string fileContents = "";
 	std::string line;
 	while (std::getline(File, line)) {
 		fileContents += line + "\n";
 	}
 	File.close();
-	const char* contentsPtr = fileContents.c_str();
-	glShaderSource(id, 1, &contentsPtr, nullptr);
+	const char* contentsPtr = fileContents.c_str();*/
+	glShaderSource(id, 1, &source, nullptr);
 	glCompileShader(id);
 
 	GLint success = 0;
