@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GLSLProgram.cpp" />
+    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainExercise.cpp" />
     <ClCompile Include="MandelBrotProgram.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLSLProgram.h" />
+    <ClInclude Include="IOManager.h" />
     <ClInclude Include="MainExercise.h" />
     <ClInclude Include="MandelBrotProgram.h" />
     <ClInclude Include="Window.h" />

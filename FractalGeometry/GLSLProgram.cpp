@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <FractalGeometry\IOManager.h>
 
 
 GLSLProgram::GLSLProgram() : _numAttributes(0),  _vertexShaderId(0), _fragmentShaderId(0), _programId(0)

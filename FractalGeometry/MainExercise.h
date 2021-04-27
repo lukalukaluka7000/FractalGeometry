@@ -2,6 +2,7 @@
 #include <FractalGeometry\Window.h>
 #include <FractalGeometry\MandelBrotProgram.h>
 #include <FractalGeometry\GLSLProgram.h>
+#include <vector>
 enum class GameState { RUNNING, EXIT };
 class MainExercise
 {
