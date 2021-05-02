@@ -32,7 +32,7 @@ void MainExercise::initSystems()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	_window.initWindow("Visualizing Mandelbrot", _windowWidth, _windowHeight, 1368, 468, 0x0);
+	_window.initWindow("Visualizing Mandelbrot", _windowWidth, _windowHeight, 1368, 468, _window.RESIZABLE /*| _window.BORDERLESS*/);
 	
 	initShaders();
 	initStaticData();
@@ -57,7 +57,7 @@ void MainExercise::initStaticData()
 	//we want ths buffer to be active
 	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 
-	std::vector<unsigned int> pixelData = GeneratePixels(); vek_size = pixelData.size();
+	std::vector<unsigned int> pixelData = GeneratePixels();
 	//UPLOAD THE DATA
 	glBufferData(GL_ARRAY_BUFFER, pixelData.size() * sizeof(unsigned int), &pixelData[0], GL_STATIC_DRAW);
 
@@ -92,7 +92,7 @@ void MainExercise::exerciseLoop()
 {
 	while (_gameState != GameState::EXIT ) {
 
-		//process Input
+		processInput();
 
 		//mandelbrotProgram.Update
 
@@ -117,6 +117,11 @@ void MainExercise::drawGame()
 }
 void MainExercise::processInput()
 {
+	SDL_Event evnt;
+	while (SDL_PollEvent(&evnt))
+	{
+		// Later, you'll be adding your code that handles keyboard / mouse input here
+	}
 }
 
 

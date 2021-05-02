@@ -1,10 +1,17 @@
 #pragma once
 #include<SDL/SDL.h>
 #include <string>
-enum  WindowFlags { INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4, RESIZABLE = 0x8 };
+
 class Window
 {
 public:
+	static enum  WindowFlags
+	{
+		INVISIBLE = 1 << 0,  // binary 0001
+		FULLSCREEN = 1 << 1, //// binary 0010
+		BORDERLESS = 1 << 2,
+		RESIZABLE = 1 << 3
+	};
 	void initWindow(std::string windowName, int SW, int SH, int startX, int startY, unsigned int flagThatWasPassed);
 	void swapBuffer();
 private:
