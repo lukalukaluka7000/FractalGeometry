@@ -4,7 +4,7 @@
 #include <vector>
 unsigned int VBO;
 
-#define LIMIT 200
+#define LIMIT 16
 #define ODMAK_OD_RUBA 30.0f
 int vek_size;
 MainExercise::MainExercise() : _windowWidth(200), _windowHeight(200)

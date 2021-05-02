@@ -25,7 +25,7 @@ void main(){
     vec2 complex_next= vec2(0.0f, 0.0f);
     
     bool isDone = false; divStep = 0;
-    while(!isDone && divStep < limit) {
+    while(!isDone && divStep != limit) {
         complex_next = vec2(0.0f, 0.0f);
         complex_next.x = pow(complex_curr.x,2)-pow(complex_curr.y,2)+c.x;
         complex_next.y = 2*complex_curr.x*complex_curr.y+c.y;
@@ -39,5 +39,9 @@ void main(){
         }
         divStep+=1;
     }
+    if(!isDone)
+        divStep = 0;
+    // if(divStep > 0 && divStep < 3)
+        // divStep = 0;
     
 }
