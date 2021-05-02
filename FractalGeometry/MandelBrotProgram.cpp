@@ -132,17 +132,3 @@ void MandelBrotProgram::prepareOverlapingCoordinatePlanes()
 //		glEnd();
 //	}
 //}
-//
-//
-//void renderScene() {
-//	//drawSnowFlake();
-//
-//	//drawIFSPaprat();
-//	//drawIFSSierpinskiTriangle();
-//
-//	//LinderMayerSystem();
-//	//LinderMayerSystemPrekinuteKrivulje();
-//
-//	MandelBrotDraw();
-//	//JulijeDraw();
-//}

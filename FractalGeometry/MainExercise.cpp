@@ -3,6 +3,10 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <vector>
 unsigned int VBO;
+
+#define LIMIT 200
+#define ODMAK_OD_RUBA 30.0f
+int vek_size;
 MainExercise::MainExercise() : _windowWidth(200), _windowHeight(200)
 {
 }
@@ -33,7 +37,7 @@ void MainExercise::initSystems()
 	
 	initShaders();
 	initStaticData();
-	_mandelbrot.init(4.0f, _windowWidth, _windowHeight, 150, glm::vec2(0.0f, 0.0f), 30.0f);
+	_mandelbrot.init(4.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
 }
 std::vector<unsigned int> MainExercise::GeneratePixels() {
 	std::vector<unsigned int> temp;
@@ -52,7 +56,7 @@ void MainExercise::initStaticData()
 	//we want ths buffer to be active
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	std::vector<unsigned int> pixelData = GeneratePixels();
+	std::vector<unsigned int> pixelData = GeneratePixels(); vek_size = pixelData.size();
 	//UPLOAD THE DATA
 	glBufferData(GL_ARRAY_BUFFER, pixelData.size() * sizeof(unsigned int), &pixelData[0], GL_STATIC_DRAW);
 
@@ -65,17 +69,7 @@ void MainExercise::initShaders() {
 	_glslProgram.addAttribute("pixel");
 	_glslProgram.linkShaders();
 }
-//int limit = 150; // limit je 200 dosta za Slika 13.9
-////int limit = 16; // julijev
-//float umin = 0.0f; float umax = 0.0f;
-//float vmin = -0.0f; float vmax = 0.0f;
-//
-//// klascini mandelbrot center(0,0), w=4
-//float centerX = 0.0f;//-0.7454265f; // centat komplexne ravnine X
-//float centerY = 0.0f;//0.1130090f; // centat komplexne ravnine Y
-//float w = 4.0f; // sirina i visina komplexne ravnine
-//int cnt = 1;
-//float odmakOdRuba = 30.0f;
+
 void MainExercise::exerciseLoop()
 {
 	while (_gameState != GameState::EXIT ) {
@@ -108,7 +102,7 @@ void MainExercise::drawGame()
 	glUniform2fv(uvMaxLocation, 1, glm::value_ptr(_mandelbrot.getUVMax()));
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glDrawArrays(GL_POINTS, 0, 1);
+	glDrawArrays(GL_POINTS, 0, vek_size);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	_glslProgram.unuse();
