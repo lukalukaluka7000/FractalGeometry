@@ -18,6 +18,8 @@ private:
 
 	void initStaticData();
 
+	void sendUniforms();
+
 	void exerciseLoop();
 	void processInput();
 
@@ -42,4 +44,6 @@ private:
 	GameState _gameState;
 
 	GLSLProgram _glslProgram;
+
+	unsigned int _VBO;
 };
