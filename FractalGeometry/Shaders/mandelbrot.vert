@@ -40,6 +40,4 @@ void main(){
         divStep+=1;
     }
     
-     if(!isDone)
-         divStep = 0.3f;
 }

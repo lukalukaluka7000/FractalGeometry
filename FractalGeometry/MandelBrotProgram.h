@@ -7,8 +7,8 @@ public:
 	int getLimit() { return _limit; }
 	glm::vec2 getUVMin() { return _uvMin; }
 	glm::vec2 getUVMax() { return _uvMax; }
-private:
 	void prepareOverlapingCoordinatePlanes();
+private:
 	int _limit;
 	glm::vec2 _uvMin, _uvMax, _center;
 	float _w, _odmakOdRuba;

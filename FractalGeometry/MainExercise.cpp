@@ -38,6 +38,7 @@ void MainExercise::initSystems()
 	initShaders();
 	initStaticData();
 	_mandelbrot.init(4.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
+	_mandelbrot.prepareOverlapingCoordinatePlanes();
 }
 std::vector<unsigned int> MainExercise::GeneratePixels() {
 	std::vector<unsigned int> temp;
