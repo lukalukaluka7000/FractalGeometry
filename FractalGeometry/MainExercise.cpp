@@ -120,7 +120,11 @@ void MainExercise::processInput()
 	SDL_Event evnt;
 	while (SDL_PollEvent(&evnt))
 	{
-		// Later, you'll be adding your code that handles keyboard / mouse input here
+		switch (evnt.type) {
+		case SDL_QUIT:
+			_gameState = GameState::EXIT;
+			break;
+		}
 	}
 }
 

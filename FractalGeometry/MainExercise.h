@@ -3,6 +3,7 @@
 #include <FractalGeometry\MandelBrotProgram.h>
 #include <FractalGeometry\GLSLProgram.h>
 #include <vector>
+#include <FractalGeometry\InputManager.h>
 enum class GameState { RUNNING, EXIT };
 class MainExercise
 {
@@ -46,4 +47,6 @@ private:
 	GLSLProgram _glslProgram;
 
 	unsigned int _VBO;
+
+	InputManager _inputManager;
 };
