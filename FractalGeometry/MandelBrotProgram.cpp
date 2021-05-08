@@ -10,7 +10,7 @@ void MandelBrotProgram::init(float w, int SW, int SH, int limit, glm::vec2 cente
 	_center = center;
 	_odmakOdRuba = odmakOdRuba;
 }
-void MandelBrotProgram::prepareOverlapingCoordinatePlanes() 
+void MandelBrotProgram::overlapCoordinatePlanes() 
 {
 	_uvMin = glm::vec2(_center.x - _w / 2.0f, _center.y - _w / 2.0f);
 	_uvMax = glm::vec2(_center.x + _w / 2.0f, _center.y + _w / 2.0f);

@@ -5,6 +5,7 @@
 
 #define LIMIT 16
 #define ODMAK_OD_RUBA 30.0f
+#define W_DECREMENT 0.1f
 
 MainExercise::MainExercise() : _windowWidth(200), _windowHeight(200)
 {
@@ -36,8 +37,8 @@ void MainExercise::initSystems()
 	
 	initShaders();
 	initStaticData();
-	_mandelbrot.init(4.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
-	_mandelbrot.prepareOverlapingCoordinatePlanes();
+	_mandelbrot.init(2.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
+	_mandelbrot.overlapCoordinatePlanes();
 	sendUniforms();
 }
 std::vector<unsigned int> MainExercise::GeneratePixels() {
@@ -76,10 +77,6 @@ void MainExercise::sendUniforms() {
 	GLushort limitLocation = _glslProgram.getUniformLocation("limit");
 	glUniform1i(limitLocation, _mandelbrot.getLimit());
 
-	GLushort uvMinLocation = _glslProgram.getUniformLocation("uvMin");
-	glUniform2fv(uvMinLocation, 1, glm::value_ptr(_mandelbrot.getUVMin()));
-	GLushort uvMaxLocation = _glslProgram.getUniformLocation("uvMax");
-	glUniform2fv(uvMaxLocation, 1, glm::value_ptr(_mandelbrot.getUVMax()));
 	_glslProgram.unuse();
 }
 void MainExercise::initShaders() {
@@ -94,7 +91,7 @@ void MainExercise::exerciseLoop()
 
 		processInput();
 
-		//mandelbrotProgram.Update
+		_mandelbrot.overlapCoordinatePlanes();
 
 		drawGame();
 	}
@@ -105,6 +102,11 @@ void MainExercise::drawGame()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	_glslProgram.use();
+
+	GLushort uvMinLocation = _glslProgram.getUniformLocation("uvMin");
+	glUniform2fv(uvMinLocation, 1, glm::value_ptr(_mandelbrot.getUVMin()));
+	GLushort uvMaxLocation = _glslProgram.getUniformLocation("uvMax");
+	glUniform2fv(uvMaxLocation, 1, glm::value_ptr(_mandelbrot.getUVMax()));
 
 	glDrawArrays(GL_POINTS, 0, _windowWidth*_windowHeight);
 
@@ -124,7 +126,14 @@ void MainExercise::processInput()
 		case SDL_QUIT:
 			_gameState = GameState::EXIT;
 			break;
+		case SDL_MOUSEWHEEL:
+			if(evnt.wheel.y > 0)
+				_mandelbrot.setW(_mandelbrot.getW() - W_DECREMENT);
+			else if(evnt.wheel.y < 0)
+				_mandelbrot.setW(_mandelbrot.getW() + W_DECREMENT);
+			break;
 		}
+		
 	}
 }
 
