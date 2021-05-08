@@ -6,12 +6,8 @@ int main(int argc, char* argv[]) {
 
 
 	MainExercise mainExercise;
-	//mainExercise.init(320, 200); // kochova krivulja i pahuljica
-	mainExercise.init(600, 600);
-	//mainExercise.init(600, 600); // IFS paprati
-	
-
-	mainExercise.run(argc, argv);
+	mainExercise.init(400, 400, 50, 50);
+	mainExercise.run();
 
 	return 0;
 }

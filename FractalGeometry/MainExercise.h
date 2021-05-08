@@ -1,22 +1,49 @@
 #pragma once
-
+#include <FractalGeometry\Window.h>
+#include <FractalGeometry\MandelBrotProgram.h>
+#include <FractalGeometry\GLSLProgram.h>
+#include <vector>
+enum class GameState { RUNNING, EXIT };
 class MainExercise
 {
 public:
-	void run(int argc, char* argv[]);
-	void init(int windowWidth, int windowHeight);
+	MainExercise();
+	~MainExercise();
 
-	//void renderScene();
-	static void display();
-	static void reshape(int width, int height);
-	static void OnMouseClick(int button, int state, int x, int y);
-	static void OnKeyboardClick(unsigned char key, int x, int y);
+	void init(int windowWidth, int windowHeight, int startX, int startY);
+	void run();
+	void drawGame();
+private:
+	void initSystems();
+
+	void initStaticData();
+
+	void sendUniforms();
+
+	void exerciseLoop();
+	void processInput();
+
+	void reshape(int SW, int SH);
+
 
 	int getWindHeight() { return _windowHeight; }
 	int getWindWidth() { return _windowWidth; }
 
-private:
+	void initShaders();
+
+	std::vector<unsigned int> GeneratePixels();
+
+	Window _window;
+	MandelBrotProgram _mandelbrot;
+
 	int _windowWidth;
 	int _windowHeight;
+	int _startX;
+	int _startY;
 
+	GameState _gameState;
+
+	GLSLProgram _glslProgram;
+
+	unsigned int _VBO;
 };
