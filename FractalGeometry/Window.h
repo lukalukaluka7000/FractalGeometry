@@ -14,9 +14,10 @@ public:
 	};
 	void initWindow(std::string windowName, int SW, int SH, int startX, int startY, unsigned int flagThatWasPassed);
 	void swapBuffer();
+	SDL_Window* _sdlWindow;
 private:
 	int _screenWidth;
 	int _screenHeight;
-	SDL_Window* _sdlWindow;
+	
 };
 

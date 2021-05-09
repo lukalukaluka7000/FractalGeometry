@@ -11,7 +11,7 @@ public:
 	MainExercise();
 	~MainExercise();
 
-	void init(int windowWidth, int windowHeight, int startX, int startY);
+	void init(float windowWidth, float windowHeight, int startX, int startY);
 	void run();
 	void drawGame();
 private:
@@ -33,12 +33,13 @@ private:
 	void initShaders();
 
 	std::vector<unsigned int> GeneratePixels();
+	glm::vec2 get_mouse_texture_coords(int x, int y);
 
 	Window _window;
 	MandelBrotProgram _mandelbrot;
 
-	int _windowWidth;
-	int _windowHeight;
+	float _windowWidth;
+	float _windowHeight;
 	int _startX;
 	int _startY;
 

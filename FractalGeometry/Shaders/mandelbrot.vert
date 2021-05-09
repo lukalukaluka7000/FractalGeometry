@@ -16,10 +16,10 @@ void main(){
     ndc.y = 1 - (2*pixel.y)/SH;
     gl_Position = vec4(ndc, 0.0f, 1.0f);
     vec2 c;
-    c.x=((pixel.x-xmin)/ float(SW-xmin))*(uvMax.x-uvMin.x)+uvMin.x;
-    c.y=((pixel.y-ymin)/ float(SH-ymin))*(uvMax.y-uvMin.y)+uvMin.y;
-    
-    
+    //c.x=((pixel.x-xmin)/ float(SW-xmin))*(uvMax.x-uvMin.x)+uvMin.x;
+    //c.y=((pixel.y-ymin)/ float(SH-ymin))*(uvMax.y-uvMin.y)+uvMin.y;
+    c.x = ((uvMax.x - uvMin.x)/SW)*pixel.x + uvMin.x;
+    c.y = ((uvMax.y - uvMin.y)/SH)*pixel.y + uvMin.y;
     
     vec2 complex_curr= vec2(0.0f, 0.0f);
     vec2 complex_next= vec2(0.0f, 0.0f);

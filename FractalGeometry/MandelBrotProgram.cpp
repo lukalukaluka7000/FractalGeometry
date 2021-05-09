@@ -1,7 +1,8 @@
 #include "MandelBrotProgram.h"
 #include <cmath>
+#include <iostream>
 
-void MandelBrotProgram::init(float w, int SW, int SH, int limit, glm::vec2 center, float odmakOdRuba)
+void MandelBrotProgram::init(float w, float SW, float SH, int limit, glm::vec2 center, float odmakOdRuba)
 {
 	_w = w;
 	_SW = SW;
@@ -12,10 +13,17 @@ void MandelBrotProgram::init(float w, int SW, int SH, int limit, glm::vec2 cente
 }
 void MandelBrotProgram::overlapCoordinatePlanes() 
 {
-	_uvMin = glm::vec2(_center.x - _w / 2.0f, _center.y - _w / 2.0f);
-	_uvMax = glm::vec2(_center.x + _w / 2.0f, _center.y + _w / 2.0f);
+	glm::vec2 newCenter = getCenter();
+	_uvMin = glm::vec2(newCenter.x - _w / 2.0f, newCenter.y - _w / 2.0f); //had to flip y axis
+	_uvMax = glm::vec2(newCenter.x + _w / 2.0f, newCenter.y + _w / 2.0f);
 }
-
+glm::vec2 MandelBrotProgram::convertDisplayToComplexCoords(glm::vec2 displayCoords) {
+	std::cout << float(displayCoords.x) << " " << float(displayCoords.y) << std::endl;
+	return glm::vec2(
+		((_uvMax.x - _uvMin.x) / _SW) * displayCoords.x + _uvMin.x,
+		((_uvMax.y - _uvMin.y) / _SH) * displayCoords.y + _uvMin.y
+	);
+}
 //struct Complex {
 //	Complex() {
 //		this->real = 0.0f; this->imag = 0.0f;

@@ -15,7 +15,7 @@ MainExercise::~MainExercise()
 {
 }
 
-void MainExercise::init(int windowWidth, int windowHeight, int startX, int startY) {
+void MainExercise::init(float windowWidth, float windowHeight, int startX, int startY) {
 	_windowWidth = windowWidth;
 	_windowHeight = windowHeight;
 	_startX = startX;
@@ -37,7 +37,7 @@ void MainExercise::initSystems()
 	
 	initShaders();
 	initStaticData();
-	_mandelbrot.init(2.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
+	_mandelbrot.init(4.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
 	_mandelbrot.overlapCoordinatePlanes();
 	sendUniforms();
 }
@@ -114,9 +114,10 @@ void MainExercise::drawGame()
 	_window.swapBuffer();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
+
 void MainExercise::processInput()
 {
 	SDL_Event evnt;
@@ -127,6 +128,14 @@ void MainExercise::processInput()
 			_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEWHEEL:
+			//update mouse coords only when wheel evnt activates
+			int x, y;
+			SDL_GetMouseState(&x, &y);
+			glm::vec2 oldCenter = _mandelbrot.getCenter();
+			glm::vec2 newCenterDirection = _mandelbrot.convertDisplayToComplexCoords(glm::vec2(float(x), float(y)));
+
+			_mandelbrot.setCenter((newCenterDirection - oldCenter));
+
 			if(evnt.wheel.y > 0)
 				_mandelbrot.setW(_mandelbrot.getW() - W_DECREMENT);
 			else if(evnt.wheel.y < 0)
