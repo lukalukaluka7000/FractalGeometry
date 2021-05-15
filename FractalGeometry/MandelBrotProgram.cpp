@@ -5,6 +5,7 @@
 void MandelBrotProgram::init(float w, float SW, float SH, int limit, glm::vec2 center, float odmakOdRuba)
 {
 	_w = w;
+	_startingW = _w;
 	_SW = SW;
 	_SH = SH;
 	_limit = limit;
@@ -14,11 +15,13 @@ void MandelBrotProgram::init(float w, float SW, float SH, int limit, glm::vec2 c
 void MandelBrotProgram::overlapCoordinatePlanes() 
 {
 	glm::vec2 newCenter = getCenter();
-	_uvMin = glm::vec2(newCenter.x - _w / 2.0f, newCenter.y - _w / 2.0f); //had to flip y axis
-	_uvMax = glm::vec2(newCenter.x + _w / 2.0f, newCenter.y + _w / 2.0f);
+	_uvMin = glm::vec2(newCenter.x - _w / 2.0f, newCenter.y + _w / 2.0f); // vmin is vmax 'cause of opengl inverted y axis
+	_uvMax = glm::vec2(newCenter.x + _w / 2.0f, newCenter.y - _w / 2.0f);
+	//std::cout << getW() << std::endl;
 }
 glm::vec2 MandelBrotProgram::convertDisplayToComplexCoords(glm::vec2 displayCoords) {
-	std::cout << float(displayCoords.x) << " " << float(displayCoords.y) << std::endl;
+	//std::cout << float(displayCoords.x) << " " << float(displayCoords.y) << std::endl;
+	//4.0f / pow(1.1f, _mandelbrot.getAndIncrementScrollCounter())
 	return glm::vec2(
 		((_uvMax.x - _uvMin.x) / _SW) * displayCoords.x + _uvMin.x,
 		((_uvMax.y - _uvMin.y) / _SH) * displayCoords.y + _uvMin.y

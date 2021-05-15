@@ -2,10 +2,9 @@
 #include "MainExercise.h"
 #include <glm\gtc\type_ptr.hpp>
 #include <vector>
-
-#define LIMIT 16
+#include <cmath>
+#define LIMIT 32
 #define ODMAK_OD_RUBA 30.0f
-#define W_DECREMENT 0.1f
 
 MainExercise::MainExercise() : _windowWidth(200), _windowHeight(200)
 {
@@ -90,9 +89,10 @@ void MainExercise::exerciseLoop()
 	while (_gameState != GameState::EXIT ) {
 
 		processInput();
-
+		
+		//std::cout << _mandelbrot.getCenter().x << " " << _mandelbrot.getCenter().y << std::endl;
 		_mandelbrot.overlapCoordinatePlanes();
-
+		
 		drawGame();
 	}
 }
@@ -121,6 +121,7 @@ void MainExercise::drawGame()
 void MainExercise::processInput()
 {
 	SDL_Event evnt;
+	
 	while (SDL_PollEvent(&evnt))
 	{
 		switch (evnt.type) {
@@ -129,21 +130,75 @@ void MainExercise::processInput()
 			break;
 		case SDL_MOUSEWHEEL:
 			//update mouse coords only when wheel evnt activates
-			int x, y;
-			SDL_GetMouseState(&x, &y);
-			glm::vec2 oldCenter = _mandelbrot.getCenter();
-			glm::vec2 newCenterDirection = _mandelbrot.convertDisplayToComplexCoords(glm::vec2(float(x), float(y)));
-
-			_mandelbrot.setCenter((newCenterDirection - oldCenter));
-
-			if(evnt.wheel.y > 0)
-				_mandelbrot.setW(_mandelbrot.getW() - W_DECREMENT);
-			else if(evnt.wheel.y < 0)
-				_mandelbrot.setW(_mandelbrot.getW() + W_DECREMENT);
+			//int x, y;
+			//SDL_GetMouseState(&x, &y);
+			//glm::vec2 oldCenter = _mandelbrot.getCenter();
+			//glm::vec2 newCenterDirection = _mandelbrot.convertDisplayToComplexCoords(glm::vec2(float(x), float(y)));
+			////(newCenterDirection - oldCenter)
+			//glm::vec2 res = (newCenterDirection - oldCenter) ;
+			///*if (glm::length(res) > .3f) {
+			//	res /= 2.5f;
+			//}*/
+			//std::cout << oldCenter.x << " " << oldCenter.y << std::endl;
+			//std::cout << newCenterDirection.x << " " << newCenterDirection.y << std::endl;
+			//std::cout << res.x << " " << res.y << std::endl;
+			//std::cout << _mandelbrot.getScrollCounter() << std::endl;
+			//_mandelbrot.setCenter(newCenterDirection);
+			//std::cout << _mandelbrot.getCenter().x << " " << _mandelbrot.getCenter().y << std::endl;
+			if (evnt.wheel.y > 0) {
+				// 1.1 constant got on geogebra for less steep function
+				//_mandelbrot.setW(4.0f / pow(1.1f, _mandelbrot.getAndIncrementScrollCounter()));
+				int zoomLevel = _mandelbrot.getAndIncrementScrollCounter();
+				float zoomValue = 0.1f / (pow(1.01, zoomLevel));
+				std::cout << _mandelbrot.getStartingW() / pow(1.1, zoomLevel) << std::endl;
+				std::cout << _mandelbrot.getW() - zoomValue << std::endl << std::endl;
+				float result = _mandelbrot.getStartingW() / pow(1.1, zoomLevel);
+				_mandelbrot.setW(result);
+			}
+			else if (evnt.wheel.y < 0) {
+				//_mandelbrot.setW(4.0f / pow(1.1f, _mandelbrot.getAndDecrementScrollCounter()));
+				int zoomLevel = _mandelbrot.getAndDecrementScrollCounter();
+				float zoomValue = 0.1f / (pow(1.01, zoomLevel));
+				float result = _mandelbrot.getStartingW() / pow(1.1, zoomLevel);
+				_mandelbrot.setW(result);
+			}
+			//std::cout << _mandelbrot.getW() << std::endl;
+			break;
+		case SDL_KEYDOWN:
+			_inputManager.keyPressed(evnt.key.keysym.sym);
+			break;
+		case SDL_KEYUP:
+			_inputManager.keyRelease(evnt.key.keysym.sym);
 			break;
 		}
 		
 	}
+	float increment;
+	if (_inputManager.isKeyPressed(SDLK_w))
+	{
+		//increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));
+		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
+		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x, _mandelbrot.getCenter().y + increment));
+	}
+	if (_inputManager.isKeyPressed(SDLK_a))
+	{
+		//increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));
+		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
+		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x - increment, _mandelbrot.getCenter().y));
+	}
+	if (_inputManager.isKeyPressed(SDLK_s))
+	{
+		/*increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));*/
+		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
+		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x, _mandelbrot.getCenter().y - increment));
+	}
+	if (_inputManager.isKeyPressed(SDLK_d))
+	{
+		/*increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));*/
+		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
+		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x + increment, _mandelbrot.getCenter().y));
+	}
+
 }
 
 
