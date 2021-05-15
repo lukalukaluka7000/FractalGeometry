@@ -11,22 +11,53 @@ void MandelBrotProgram::init(float w, float SW, float SH, int limit, glm::vec2 c
 	_limit = limit;
 	_center = center;
 	_odmakOdRuba = odmakOdRuba;
+	_zoomCnt = 0;
 }
 void MandelBrotProgram::overlapCoordinatePlanes() 
 {
 	glm::vec2 newCenter = getCenter();
+	/*	
+		-----Vmin-----			(0,0)---------
+		Umin------Umax	 <-->	--------------
+		-----Vmax-----			-------(SW,SH) 
+	*/
 	_uvMin = glm::vec2(newCenter.x - _w / 2.0f, newCenter.y + _w / 2.0f); // vmin is vmax 'cause of opengl inverted y axis
 	_uvMax = glm::vec2(newCenter.x + _w / 2.0f, newCenter.y - _w / 2.0f);
-	//std::cout << getW() << std::endl;
 }
 glm::vec2 MandelBrotProgram::convertDisplayToComplexCoords(glm::vec2 displayCoords) {
-	//std::cout << float(displayCoords.x) << " " << float(displayCoords.y) << std::endl;
-	//4.0f / pow(1.1f, _mandelbrot.getAndIncrementScrollCounter())
+
 	return glm::vec2(
 		((_uvMax.x - _uvMin.x) / _SW) * displayCoords.x + _uvMin.x,
 		((_uvMax.y - _uvMin.y) / _SH) * displayCoords.y + _uvMin.y
 	);
 }
+void MandelBrotProgram::setLimit(int newLimit) {
+	if (newLimit >= LIMIT) {
+		_limit = newLimit;
+	}
+}
+void MandelBrotProgram::setW(float newW) {
+	if (newW <= _startingW)
+		_w = newW;
+	else
+		std::cout << "do nothing, newW is " << newW << std::endl;
+}
+int MandelBrotProgram::getAndDecrementScrollCounter() {
+	int cntCalculated = _zoomCnt - 1;
+	if (_zoomCnt - 1 >= 0) {
+		_zoomCnt--;
+		return _zoomCnt;
+	}
+	return 0;
+}
+float MandelBrotProgram::ExponentialMultiplicativeInverse(float startingY, float steepness, int zoomLevel)
+{
+	if (zoomLevel == -1)
+		zoomLevel = _zoomCnt;
+	// Numerator starts from first value of _w. In denumerator put whatever you find more conveniently. 
+	return startingY / pow(steepness, zoomLevel);
+}
+
 //struct Complex {
 //	Complex() {
 //		this->real = 0.0f; this->imag = 0.0f;

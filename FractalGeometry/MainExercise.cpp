@@ -1,4 +1,3 @@
-#define PI 3.141592653589793
 #include "MainExercise.h"
 #include <glm\gtc\type_ptr.hpp>
 #include <vector>
@@ -89,8 +88,7 @@ void MainExercise::exerciseLoop()
 	while (_gameState != GameState::EXIT ) {
 
 		processInput();
-		
-		//std::cout << _mandelbrot.getCenter().x << " " << _mandelbrot.getCenter().y << std::endl;
+
 		_mandelbrot.overlapCoordinatePlanes();
 		
 		drawGame();
@@ -131,48 +129,25 @@ void MainExercise::processInput()
 			_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEWHEEL:
-			//update mouse coords only when wheel evnt activates
-			//int x, y;
-			//SDL_GetMouseState(&x, &y);
-			//glm::vec2 oldCenter = _mandelbrot.getCenter();
-			//glm::vec2 newCenterDirection = _mandelbrot.convertDisplayToComplexCoords(glm::vec2(float(x), float(y)));
-			////(newCenterDirection - oldCenter)
-			//glm::vec2 res = (newCenterDirection - oldCenter) ;
-			///*if (glm::length(res) > .3f) {
-			//	res /= 2.5f;
-			//}*/
-			//std::cout << oldCenter.x << " " << oldCenter.y << std::endl;
-			//std::cout << newCenterDirection.x << " " << newCenterDirection.y << std::endl;
-			//std::cout << res.x << " " << res.y << std::endl;
-			//std::cout << _mandelbrot.getScrollCounter() << std::endl;
-			//_mandelbrot.setCenter(newCenterDirection);
-			//std::cout << _mandelbrot.getCenter().x << " " << _mandelbrot.getCenter().y << std::endl;
 			if (evnt.wheel.y > 0) {
 				// 1.1 constant got on geogebra for less steep function
-				//_mandelbrot.setW(4.0f / pow(1.1f, _mandelbrot.getAndIncrementScrollCounter()));
 				int zoomLevel = _mandelbrot.getAndIncrementScrollCounter();
-				float zoomValue = 0.1f / (pow(1.01, zoomLevel));
-				/*std::cout << _mandelbrot.getStartingW() / pow(1.1, zoomLevel) << std::endl;
-				std::cout << _mandelbrot.getW() - zoomValue << std::endl << std::endl;*/
-				std::cout << _mandelbrot.getLimit() << std::endl;
-				std::cout << _mandelbrot.getScrollCounter() << std::endl << std::endl;
-				float result = _mandelbrot.getStartingW() / pow(1.1, zoomLevel);
-				_mandelbrot.setW(result);
+				_mandelbrot.setW( 
+					_mandelbrot.ExponentialMultiplicativeInverse(
+						_mandelbrot.getStartingW(), 1.1f, zoomLevel
+				));
 				
 				_mandelbrot.setLimit(zoomLevel);
 			}
 			else if (evnt.wheel.y < 0) {
-				//_mandelbrot.setW(4.0f / pow(1.1f, _mandelbrot.getAndDecrementScrollCounter()));
 				int zoomLevel = _mandelbrot.getAndDecrementScrollCounter();
-				float zoomValue = 0.1f / (pow(1.01, zoomLevel));
-				std::cout << _mandelbrot.getLimit() << std::endl;
-				std::cout << _mandelbrot.getScrollCounter() << std::endl << std::endl;
-				float result = _mandelbrot.getStartingW() / pow(1.1, zoomLevel);
-				_mandelbrot.setW(result);
+				_mandelbrot.setW( 
+					_mandelbrot.ExponentialMultiplicativeInverse(
+						_mandelbrot.getStartingW(), 1.1f, zoomLevel
+				));
 
 				_mandelbrot.setLimit(zoomLevel);
 			}
-			//std::cout << _mandelbrot.getW() << std::endl;
 			break;
 		case SDL_KEYDOWN:
 			_inputManager.keyPressed(evnt.key.keysym.sym);
@@ -184,32 +159,32 @@ void MainExercise::processInput()
 		
 	}
 	float increment;
+	glm::vec2 center;
 	if (_inputManager.isKeyPressed(SDLK_w))
 	{
-		//increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));
-		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
-		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x, _mandelbrot.getCenter().y + increment));
+		increment = _mandelbrot.ExponentialMultiplicativeInverse(0.001f, 1.125f);
+		center = _mandelbrot.getCenter();
+		_mandelbrot.setCenter(glm::vec2(center.x, center.y + increment));
 	}
 	if (_inputManager.isKeyPressed(SDLK_a))
 	{
-		//increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));
-		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
-		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x - increment, _mandelbrot.getCenter().y));
+		increment = _mandelbrot.ExponentialMultiplicativeInverse(0.001f, 1.125f);
+		center = _mandelbrot.getCenter();
+		_mandelbrot.setCenter(glm::vec2(center.x - increment, center.y));
 	}
 	if (_inputManager.isKeyPressed(SDLK_s))
 	{
-		/*increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));*/
-		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
-		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x, _mandelbrot.getCenter().y - increment));
+		increment = _mandelbrot.ExponentialMultiplicativeInverse(0.001f, 1.125f);
+		center = _mandelbrot.getCenter();
+		_mandelbrot.setCenter(glm::vec2(center.x, center.y - increment));
 	}
 	if (_inputManager.isKeyPressed(SDLK_d))
 	{
-		/*increment = 1.0f / (pow(1.1f, float(_mandelbrot.getScrollCounter())));*/
-		increment = 0.001f / (pow(1.125, _mandelbrot.getScrollCounter()));
-		_mandelbrot.setCenter(glm::vec2(_mandelbrot.getCenter().x + increment, _mandelbrot.getCenter().y));
+		increment = _mandelbrot.ExponentialMultiplicativeInverse(0.001f, 1.125f);
+		center = _mandelbrot.getCenter();
+		_mandelbrot.setCenter(glm::vec2(center.x + increment, center.y));
 	}
 
 }
-
 
 

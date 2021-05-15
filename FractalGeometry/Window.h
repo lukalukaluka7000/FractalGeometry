@@ -5,7 +5,7 @@
 class Window
 {
 public:
-	static enum  WindowFlags
+	enum  WindowFlags
 	{
 		INVISIBLE = 1 << 0,  // binary 0001
 		FULLSCREEN = 1 << 1, //// binary 0010

@@ -1,5 +1,5 @@
 # FractalGeometry
-Zoom acomplished 
+Zoom acomplished. Controls: w,a,s,d and scroll wheel
  
  
 Preview:

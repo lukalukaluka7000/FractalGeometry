@@ -33,7 +33,6 @@ private:
 	void initShaders();
 
 	std::vector<unsigned int> GeneratePixels();
-	glm::vec2 get_mouse_texture_coords(int x, int y);
 
 	Window _window;
 	MandelBrotProgram _mandelbrot;
