@@ -3,7 +3,7 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <vector>
 #include <cmath>
-#define LIMIT 32
+
 #define ODMAK_OD_RUBA 30.0f
 
 MainExercise::MainExercise() : _windowWidth(200), _windowHeight(200)
@@ -107,6 +107,8 @@ void MainExercise::drawGame()
 	glUniform2fv(uvMinLocation, 1, glm::value_ptr(_mandelbrot.getUVMin()));
 	GLushort uvMaxLocation = _glslProgram.getUniformLocation("uvMax");
 	glUniform2fv(uvMaxLocation, 1, glm::value_ptr(_mandelbrot.getUVMax()));
+	GLushort limitLocation = _glslProgram.getUniformLocation("limit");
+	glUniform1i(limitLocation, _mandelbrot.getLimit());
 
 	glDrawArrays(GL_POINTS, 0, _windowWidth*_windowHeight);
 
@@ -150,17 +152,25 @@ void MainExercise::processInput()
 				//_mandelbrot.setW(4.0f / pow(1.1f, _mandelbrot.getAndIncrementScrollCounter()));
 				int zoomLevel = _mandelbrot.getAndIncrementScrollCounter();
 				float zoomValue = 0.1f / (pow(1.01, zoomLevel));
-				std::cout << _mandelbrot.getStartingW() / pow(1.1, zoomLevel) << std::endl;
-				std::cout << _mandelbrot.getW() - zoomValue << std::endl << std::endl;
+				/*std::cout << _mandelbrot.getStartingW() / pow(1.1, zoomLevel) << std::endl;
+				std::cout << _mandelbrot.getW() - zoomValue << std::endl << std::endl;*/
+				std::cout << _mandelbrot.getLimit() << std::endl;
+				std::cout << _mandelbrot.getScrollCounter() << std::endl << std::endl;
 				float result = _mandelbrot.getStartingW() / pow(1.1, zoomLevel);
 				_mandelbrot.setW(result);
+				
+				_mandelbrot.setLimit(zoomLevel);
 			}
 			else if (evnt.wheel.y < 0) {
 				//_mandelbrot.setW(4.0f / pow(1.1f, _mandelbrot.getAndDecrementScrollCounter()));
 				int zoomLevel = _mandelbrot.getAndDecrementScrollCounter();
 				float zoomValue = 0.1f / (pow(1.01, zoomLevel));
+				std::cout << _mandelbrot.getLimit() << std::endl;
+				std::cout << _mandelbrot.getScrollCounter() << std::endl << std::endl;
 				float result = _mandelbrot.getStartingW() / pow(1.1, zoomLevel);
 				_mandelbrot.setW(result);
+
+				_mandelbrot.setLimit(zoomLevel);
 			}
 			//std::cout << _mandelbrot.getW() << std::endl;
 			break;

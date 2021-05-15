@@ -1,11 +1,17 @@
 #pragma once
 #include<glm/glm.hpp>
 #include <iostream>
+#define LIMIT 32
 class MandelBrotProgram
 {
 public:
 	void init(/*&_inputManager*/float w, float SW, float SH, int limit, glm::vec2 center, float odmakOdRuba);
 	int getLimit() { return _limit; }
+	void setLimit(int newLimit) {
+		if (newLimit >= LIMIT) {
+			_limit = newLimit;
+		}
+	}
 	glm::vec2 getUVMin() { return _uvMin; }
 	glm::vec2 getUVMax() { return _uvMax; }
 	void overlapCoordinatePlanes();
