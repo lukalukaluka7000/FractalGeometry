@@ -133,6 +133,7 @@ GLuint GLSLProgram::getUniformLocation(const std::string uniformName)
 {
 	GLuint location = glGetUniformLocation(_programId, uniformName.c_str());
 	if (location == GL_INVALID_INDEX) {
+		std::cout << "Failed to find uniform location in shader! " << std::endl;
 		SDL_Quit();
 		exit(69);
 	}

@@ -2,6 +2,7 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <vector>
 #include <cmath>
+#include <FractalGeometry\ResourceManager.h>
 
 #define ODMAK_OD_RUBA 30.0f
 
@@ -37,6 +38,7 @@ void MainExercise::initSystems()
 	initStaticData();
 	_mandelbrot.init(4.0f, _windowWidth, _windowHeight, LIMIT, glm::vec2(0.0f, 0.0f), ODMAK_OD_RUBA);
 	_mandelbrot.overlapCoordinatePlanes();
+	_palette = ResourceManager::getTexture("./Assets/palette.png");
 	sendUniforms();
 }
 std::vector<unsigned int> MainExercise::Vertices() {
@@ -71,6 +73,8 @@ void MainExercise::sendUniforms() {
 	glUniform1f(SWLocation, _windowWidth);
 	GLushort SHLocation = _glslProgram.getUniformLocation("SH");
 	glUniform1f(SHLocation, _windowHeight);
+	GLushort paletteLocation = _glslProgram.getUniformLocation("palette");
+	glUniform1i(paletteLocation, 0);
 
 	_glslProgram.unuse();
 }
@@ -105,6 +109,7 @@ void MainExercise::drawGame()
 	GLushort limitLocation = _glslProgram.getUniformLocation("limit");
 	glUniform1i(limitLocation, _mandelbrot.getLimit());
 
+	glBindTexture(GL_TEXTURE_1D, _palette.id);
 	glDrawArrays(GL_QUADS, 0, 4); // 1 quad
 
 	_glslProgram.unuse();

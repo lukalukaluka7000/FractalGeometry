@@ -2,7 +2,6 @@
 #include<glm/glm.hpp>
 #include <iostream>
 #define LIMIT 32
-
 class MandelBrotProgram
 {
 public:

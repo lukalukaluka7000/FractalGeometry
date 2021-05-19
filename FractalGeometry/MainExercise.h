@@ -4,6 +4,7 @@
 #include <FractalGeometry\GLSLProgram.h>
 #include <vector>
 #include <FractalGeometry\InputManager.h>
+#include <FractalGeometry\GLTexture.h>
 enum class GameState { RUNNING, EXIT };
 class MainExercise
 {
@@ -49,4 +50,6 @@ private:
 	unsigned int _VBO;
 
 	InputManager _inputManager;
+
+	GLTexture _palette;
 };

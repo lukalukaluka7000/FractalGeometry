@@ -4,6 +4,7 @@ uniform float SH;
 uniform int limit;
 uniform vec2 uvMin;
 uniform vec2 uvMax;
+uniform sampler1D palette;
 out vec4 outColor;
 
 void main(){
@@ -40,8 +41,10 @@ void main(){
     // if(divStep > 0 && divStep < 3)
         // divStep = 0;
 
+    //gl_FragColor = texture(palette, 150.0 );
+    //outColor = vec4(float(divStep)/12.0f, float(divStep)/20.0f, float(divStep)/8.0f, 1.0f);
 
-    outColor = vec4(float(divStep)/12.0f, float(divStep)/20.0f, float(divStep)/8.0f, 1.0f);
-    //outColor = vec4(0.5f, 0.5f, 0.5f, 1.0f);
+    outColor = texture(palette, (float(divStep) / 100.0));
+    //outColor = texture(palette, 150.0 );
         
 }
