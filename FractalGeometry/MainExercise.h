@@ -32,13 +32,13 @@ private:
 
 	void initShaders();
 
-	std::vector<unsigned int> GeneratePixels();
+	std::vector<unsigned int> Vertices();
 
 	Window _window;
 	MandelBrotProgram _mandelbrot;
 
-	float _windowWidth;
-	float _windowHeight;
+	int _windowWidth;
+	int _windowHeight;
 	int _startX;
 	int _startY;
 

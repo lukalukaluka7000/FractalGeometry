@@ -39,14 +39,14 @@ void MainExercise::initSystems()
 	_mandelbrot.overlapCoordinatePlanes();
 	sendUniforms();
 }
-std::vector<unsigned int> MainExercise::GeneratePixels() {
+std::vector<unsigned int> MainExercise::Vertices() {
 	std::vector<unsigned int> temp;
-	for (int i = 0; i < _windowWidth; i++) {
-		for (int j = 0; j < _windowHeight; j++) {
-			temp.push_back(i);
-			temp.push_back(j);
-		}
-	}
+	
+	temp.push_back(0); temp.push_back(0);
+	temp.push_back(_windowWidth); temp.push_back(0);
+	temp.push_back(_windowWidth); temp.push_back(_windowHeight);
+	temp.push_back(0); temp.push_back(_windowHeight);
+	
 	return temp;
 }
 void MainExercise::initStaticData()
@@ -56,10 +56,10 @@ void MainExercise::initStaticData()
 	//we want ths buffer to be active
 	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 
-	std::vector<unsigned int> pixelData = GeneratePixels();
+	std::vector<unsigned int> vertices = Vertices();
 	//UPLOAD THE DATA
-	glBufferData(GL_ARRAY_BUFFER, pixelData.size() * sizeof(unsigned int), &pixelData[0], GL_STATIC_DRAW);
-
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(unsigned int), &vertices[0], GL_STATIC_DRAW);
+	//offsset 2
 	glVertexAttribPointer(0, 2, GL_UNSIGNED_INT, GL_FALSE, 2 * sizeof(GL_UNSIGNED_INT), (void*)0);
 
 	//unbind the buffer with 0
@@ -72,14 +72,11 @@ void MainExercise::sendUniforms() {
 	GLushort SHLocation = _glslProgram.getUniformLocation("SH");
 	glUniform1f(SHLocation, _windowHeight);
 
-	GLushort limitLocation = _glslProgram.getUniformLocation("limit");
-	glUniform1i(limitLocation, _mandelbrot.getLimit());
-
 	_glslProgram.unuse();
 }
 void MainExercise::initShaders() {
 	_glslProgram.compileShaders("./Shaders/mandelbrot.vert", "./Shaders/mandelbrot.frag");
-	_glslProgram.addAttribute("pixel");
+	_glslProgram.addAttribute("screenCoords");
 	_glslProgram.linkShaders();
 }
 
@@ -108,7 +105,7 @@ void MainExercise::drawGame()
 	GLushort limitLocation = _glslProgram.getUniformLocation("limit");
 	glUniform1i(limitLocation, _mandelbrot.getLimit());
 
-	glDrawArrays(GL_POINTS, 0, _windowWidth*_windowHeight);
+	glDrawArrays(GL_QUADS, 0, 4); // 1 quad
 
 	_glslProgram.unuse();
 	_window.swapBuffer();
@@ -164,7 +161,7 @@ void MainExercise::processInput()
 	{
 		increment = _mandelbrot.ExponentialMultiplicativeInverse(0.001f, 1.125f);
 		center = _mandelbrot.getCenter();
-		_mandelbrot.setCenter(glm::vec2(center.x, center.y + increment));
+		_mandelbrot.setCenter(glm::vec2(center.x, center.y - increment));
 	}
 	if (_inputManager.isKeyPressed(SDLK_a))
 	{
@@ -176,7 +173,7 @@ void MainExercise::processInput()
 	{
 		increment = _mandelbrot.ExponentialMultiplicativeInverse(0.001f, 1.125f);
 		center = _mandelbrot.getCenter();
-		_mandelbrot.setCenter(glm::vec2(center.x, center.y - increment));
+		_mandelbrot.setCenter(glm::vec2(center.x, center.y + increment));
 	}
 	if (_inputManager.isKeyPressed(SDLK_d))
 	{
