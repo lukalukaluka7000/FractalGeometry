@@ -50,7 +50,7 @@ int MandelBrotProgram::getAndDecrementScrollCounter() {
 	}
 	return 0;
 }
-float MandelBrotProgram::ExponentialMultiplicativeInverse(float startingY, float steepness, int zoomLevel)
+long double MandelBrotProgram::ExponentialMultiplicativeInverse(float startingY, float steepness, int zoomLevel)
 {
 	if (zoomLevel == -1)
 		zoomLevel = _zoomCnt;

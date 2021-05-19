@@ -35,7 +35,7 @@ public:
 	/// steep parameter is in this case "x". As x get larger, function gets steeper, faster to zero, which means faster zooming.
 	/// Tweak these parameters carefully. For each functionality, you have to tweek them accordingly. Until better solution is found.
 	/// </summary>
-	float ExponentialMultiplicativeInverse(float startingY, float steep, int zoomLevel = -1);
+	long double ExponentialMultiplicativeInverse(float startingY, float steep, int zoomLevel = -1);
 private:
 	/// <summary>Limit value for number of iterations to find iteration where complex number diverged out of mandelbrot set (radius = 2)</summary>
 	int _limit;
